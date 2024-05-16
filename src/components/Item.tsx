@@ -7,22 +7,42 @@ interface Props {
   onItemClick: () => void;
 }
 
+const normalizeText = (text: string) => {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
+
+const escapeRegExp = (text: string) => {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+};
+
 const highlightText = (text: string, query: string) => {
   if (!query) return text;
 
-  const regex = new RegExp(`(${query})`, "gi");
+  try {
+    const normalizedText = normalizeText(text);
+    const normalizedQuery = normalizeText(query);
 
-  return text.split(regex).map((part, index) => {
-    if (regex.test(part)) {
-      return (
-        <span key={index} className="highlight">
-          {part}
-        </span>
-      );
-    } else {
-      return part;
-    }
-  });
+    const escapedQuery = escapeRegExp(normalizedQuery);
+    const regex = new RegExp(`(${escapedQuery})`, "gi");
+
+    return normalizedText.split(regex).map((part, index) => {
+      const startIndex = normalizedText.indexOf(part);
+      const endIndex = startIndex + part.length;
+
+      if (regex.test(part)) {
+        return (
+          <span key={index} className="highlight">
+            {text.slice(startIndex, endIndex)}
+          </span>
+        );
+      } else {
+        return text.slice(startIndex, endIndex);
+      }
+    });
+  } catch (error) {
+    console.error("Error in highlightText function:", error);
+    return text;
+  }
 };
 
 export const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
