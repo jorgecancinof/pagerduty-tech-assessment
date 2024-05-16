@@ -9,7 +9,7 @@ const QUERY_DEBOUNCE_DELAY_MS = 500;
 export const App: React.FC = () => {
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, QUERY_DEBOUNCE_DELAY_MS);
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [recipes, setRecipes] = useState<Recipe[] | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -25,7 +25,7 @@ export const App: React.FC = () => {
         setSelectedIndex={setSelectedIndex}
         searchInputRef={searchInputRef}
         focusSearchInput={focusSearchInput}
-        totalItemsCount={recipes.length}
+        totalItemsCount={recipes?.length ?? 0}
       />
       <RecipeDisplay
         query={debouncedQuery}

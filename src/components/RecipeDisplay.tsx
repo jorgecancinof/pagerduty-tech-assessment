@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useFetch from "../hooks/useFetch";
 import { List } from "./List";
 import { Details } from "./Details";
+import { MessageDisplay } from "./MessageDisplay.tsx";
 import { Recipe, RecipeResponse } from "../types/Recipe";
 
 interface RecipeDisplayProps {
   query: string;
-  recipes: Recipe[];
-  setRecipes: React.Dispatch<React.SetStateAction<Recipe[]>>;
+  recipes: Recipe[] | null;
+  setRecipes: React.Dispatch<React.SetStateAction<Recipe[] | null>>;
   selectedIndex: number | null;
   setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>;
   focusSearchInput: () => void;
@@ -21,27 +22,36 @@ export const RecipeDisplay: React.FC<RecipeDisplayProps> = ({
   setSelectedIndex,
   focusSearchInput,
 }) => {
-  const { fetchedData } = useFetch<RecipeResponse>(
-    `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
-  );
+  const { isLoading, isError } = useFetch<RecipeResponse>({
+    input: `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
+    onSuccess: (data) => {
+      setRecipes(data.meals ?? []);
+      setSelectedIndex(0);
+    },
+  });
 
-  useEffect(() => {
-    setRecipes(fetchedData?.meals || []);
-    setSelectedIndex(fetchedData ? 0 : null);
-  }, [fetchedData, setRecipes, setSelectedIndex]);
+  if (isError) {
+    return <MessageDisplay>Error</MessageDisplay>;
+  }
+
+  if (isLoading || recipes === null) {
+    return <MessageDisplay>Loading...</MessageDisplay>;
+  }
+
+  if (recipes.length === 0) {
+    return <MessageDisplay>No recipes found</MessageDisplay>;
+  }
 
   return (
-    recipes.length > 0 && (
-      <>
-        <List
-          recipes={recipes}
-          query={query}
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          focusSearchInput={focusSearchInput}
-        />
-        {selectedIndex !== null && <Details recipe={recipes[selectedIndex]} />}
-      </>
-    )
+    <>
+      <List
+        recipes={recipes}
+        query={query}
+        selectedIndex={selectedIndex}
+        setSelectedIndex={setSelectedIndex}
+        focusSearchInput={focusSearchInput}
+      />
+      {selectedIndex !== null && <Details recipe={recipes[selectedIndex]} />}
+    </>
   );
 };
