@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback } from "react";
 import useDebounce from "../hooks/useDebounce";
-import { mockRecipesRequest } from "../services/api";
+import { useFetch } from "../hooks/useFetch";
 import IconSearch from "./icons/IconSearch.tsx";
 import IconCloseCircle from "./icons/IconCloseCircle.tsx";
-import { Recipe } from "../types/Recipe";
+import { Recipe, RecipeResponse } from "../types/Recipe";
 
 interface Props {
   query: string;
@@ -28,30 +28,26 @@ export const Search: React.FC<Props> = ({
 }) => {
   const debouncedQuery = useDebounce(query, QUERY_DEBOUNCE_DELAY_MS);
 
+  const { fetchedData } = useFetch<RecipeResponse>(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${debouncedQuery}`,
+  );
+
+  useEffect(() => {
+    if (fetchedData) {
+      setRecipes(fetchedData.meals || []);
+      setSelectedIndex(0);
+    } else {
+      setRecipes([]);
+      setSelectedIndex(null);
+    }
+  }, [fetchedData, setRecipes, setSelectedIndex]);
+
   const handleSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const value = event.target.value;
     setQuery(value);
   };
-
-  const fetchRecipes = useCallback(
-    async (query: string) => {
-      if (query.length > 0) {
-        const results = await mockRecipesRequest(query);
-        setRecipes(results.meals);
-        setSelectedIndex(0);
-      } else {
-        setRecipes([]);
-        setSelectedIndex(null);
-      }
-    },
-    [setRecipes, setSelectedIndex],
-  );
-
-  useEffect(() => {
-    fetchRecipes(debouncedQuery);
-  }, [fetchRecipes, debouncedQuery]);
 
   const handleClear = useCallback(() => {
     setQuery("");

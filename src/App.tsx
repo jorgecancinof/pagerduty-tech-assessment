@@ -1,8 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Search } from "./components/Search";
-import { List } from "./components/List";
-import { Details } from "./components/Details";
-import { MessageDisplay } from "./components/MessageDisplay.tsx";
+import { RecipeDisplay } from "./components/RecipeDisplay";
 import { Recipe } from "./types/Recipe";
 
 export const App: React.FC = () => {
@@ -26,25 +24,13 @@ export const App: React.FC = () => {
         searchInputRef={searchInputRef}
         focusSearchInput={focusSearchInput}
       />
-      {query ? (
-        <>
-          <List
-            recipes={recipes}
-            query={query}
-            selectedIndex={selectedIndex}
-            setSelectedIndex={setSelectedIndex}
-            focusSearchInput={focusSearchInput}
-          />
-          {selectedIndex !== null && (
-            <Details recipe={recipes[selectedIndex]} />
-          )}
-        </>
-      ) : (
-        <MessageDisplay>
-          <h2>Welcome!</h2>
-          <p>Search for a recipe to get started</p>
-        </MessageDisplay>
-      )}
+      <RecipeDisplay
+        query={query}
+        recipes={recipes}
+        selectedIndex={selectedIndex}
+        setSelectedIndex={setSelectedIndex}
+        focusSearchInput={focusSearchInput}
+      />
     </main>
   );
 };
