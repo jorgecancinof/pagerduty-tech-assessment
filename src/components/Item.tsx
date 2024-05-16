@@ -1,4 +1,5 @@
 import React from "react";
+import placeholderMeal from "../assets/placeholder-meal.png";
 import { Recipe } from "../types/Recipe.ts";
 
 interface Props {
@@ -46,12 +47,23 @@ const highlightText = (text: string, query: string) => {
 };
 
 export const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
+  const mealThumbImg = recipe.strMealThumb ?? placeholderMeal;
+
   return (
-    <button className="list__button" onClick={onItemClick} type="button">
-      <h3>{highlightText(recipe.strMeal, query)}</h3>
-      <p>
+    <button
+      className="list__button"
+      style={{
+        backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%), url(${mealThumbImg})`,
+      }}
+      onClick={onItemClick}
+      type="button"
+    >
+      <span className="list__button-subtitle">
         {recipe.strArea} / {recipe.strCategory}
-      </p>
+      </span>
+      <strong className="list__button-title">
+        {highlightText(recipe.strMeal, query)}
+      </strong>
     </button>
   );
 };
