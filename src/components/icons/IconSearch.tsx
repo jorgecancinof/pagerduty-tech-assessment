@@ -1,4 +1,3 @@
-// icon:search | Feathericons https://feathericons.com/ | Cole Bemis
 import React from "react";
 
 function IconSearch(props: React.SVGProps<SVGSVGElement>) {

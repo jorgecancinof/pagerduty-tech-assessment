@@ -1,63 +1,38 @@
 import React, { useEffect, useCallback } from "react";
-import useDebounce from "../hooks/useDebounce";
-import { useFetch } from "../hooks/useFetch";
 import IconSearch from "./icons/IconSearch.tsx";
 import IconCloseCircle from "./icons/IconCloseCircle.tsx";
-import { Recipe, RecipeResponse } from "../types/Recipe";
 
 interface Props {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
-  recipes: Recipe[];
-  setRecipes: React.Dispatch<React.SetStateAction<Recipe[]>>;
   setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>;
   searchInputRef: React.RefObject<HTMLInputElement>;
   focusSearchInput: () => void;
+  totalItemsCount: number;
 }
-
-const QUERY_DEBOUNCE_DELAY_MS = 300;
 
 export const Search: React.FC<Props> = ({
   query,
   setQuery,
-  recipes,
-  setRecipes,
   setSelectedIndex,
   searchInputRef,
   focusSearchInput,
+  totalItemsCount,
 }) => {
-  const debouncedQuery = useDebounce(query, QUERY_DEBOUNCE_DELAY_MS);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
 
-  const { fetchedData } = useFetch<RecipeResponse>(
-    `https://www.themealdb.com/api/json/v1/1/search.php?s=${debouncedQuery}`,
-  );
-
-  useEffect(() => {
-    if (fetchedData) {
-      setRecipes(fetchedData.meals || []);
-      setSelectedIndex(0);
-    } else {
-      setRecipes([]);
-      setSelectedIndex(null);
-    }
-  }, [fetchedData, setRecipes, setSelectedIndex]);
+  const handleClear = useCallback(() => {
+    setQuery("");
+    focusSearchInput();
+  }, [setQuery, focusSearchInput]);
 
   const handleSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const value = event.target.value;
     setQuery(value);
-  };
-
-  const handleClear = useCallback(() => {
-    setQuery("");
-    setRecipes([]);
-    setSelectedIndex(null);
-    focusSearchInput();
-  }, [setQuery, setRecipes, setSelectedIndex, focusSearchInput]);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
   };
 
   const handleSearchInputKeyDown = (
@@ -70,7 +45,7 @@ export const Search: React.FC<Props> = ({
       event.preventDefault();
 
       setSelectedIndex((prevIndex) => {
-        const lastIndex = recipes.length - 1;
+        const lastIndex = totalItemsCount - 1;
         const isFirstItem = prevIndex === 0;
         const isLastItem = prevIndex === lastIndex;
         const isNoSelection = prevIndex === null;

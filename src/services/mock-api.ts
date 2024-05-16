@@ -1,5 +1,5 @@
 import { RecipeResponse } from "../types/Recipe.ts";
-import mockData from "./mock-data.json";
+import mockData from "./mock-api-response.json";
 
 const MOCK_RESPONSE_DELAY_MS = 500;
 

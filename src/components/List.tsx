@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { Recipe } from "../types/Recipe";
 import { Item } from "./Item";
+import { Recipe } from "../types/Recipe";
 
 interface Props {
   recipes: Recipe[];

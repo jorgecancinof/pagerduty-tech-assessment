@@ -6,10 +6,10 @@ interface FetchResponse<T> {
   error: Error | null;
 }
 
-export const useFetch = <T>(
+function useFetch<T>(
   input: RequestInfo | URL,
   options?: ResponseInit,
-): FetchResponse<T> => {
+): FetchResponse<T> {
   const [fetchedData, setFetchedData] = useState<T>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -42,4 +42,6 @@ export const useFetch = <T>(
   }, [input, options]);
 
   return { fetchedData, isLoading, error };
-};
+}
+
+export default useFetch;
