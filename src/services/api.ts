@@ -1,10 +1,9 @@
-import { Recipe, RecipeResponse } from "../types/Recipe.ts";
+import { RecipeResponse } from "../types/Recipe.ts";
 import mockData from "./mock-data.json";
 
-export const mockRecipesRequest = (
-  query: string,
-  delayInSeconds: number,
-): Promise<RecipeResponse> => {
+const MOCK_RESPONSE_DELAY_MS = 500;
+
+export const mockRecipesRequest = (query: string): Promise<RecipeResponse> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const unfilteredRecipes = mockData.meals;
@@ -14,10 +13,6 @@ export const mockRecipesRequest = (
       );
 
       resolve({ meals: filteredRecipes });
-    }, delayInSeconds * 1000);
+    }, MOCK_RESPONSE_DELAY_MS);
   });
 };
-
-export async function searchRecipes(query: string): Promise<Recipe[]> {
-  return mockRecipesRequest(query, 0.5).then((response) => response.meals);
-}

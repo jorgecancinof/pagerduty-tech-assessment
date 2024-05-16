@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from "react";
-import { searchRecipes } from "../services/api";
+import useDebounce from "../hooks/useDebounce";
+import { mockRecipesRequest } from "../services/api";
 import IconSearch from "./icons/IconSearch.tsx";
 import IconCloseCircle from "./icons/IconCloseCircle.tsx";
 import { Recipe } from "../types/Recipe";
@@ -14,6 +15,8 @@ interface Props {
   focusSearchInput: () => void;
 }
 
+const QUERY_DEBOUNCE_DELAY_MS = 300;
+
 export const Search: React.FC<Props> = ({
   query,
   setQuery,
@@ -23,21 +26,32 @@ export const Search: React.FC<Props> = ({
   searchInputRef,
   focusSearchInput,
 }) => {
-  const handleSearchInputChange = async (
+  const debouncedQuery = useDebounce(query, QUERY_DEBOUNCE_DELAY_MS);
+
+  const handleSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const value = event.target.value;
     setQuery(value);
-
-    if (value.length > 0) {
-      const results = await searchRecipes(value);
-      setRecipes(results);
-      setSelectedIndex(0);
-    } else {
-      setRecipes([]);
-      setSelectedIndex(null);
-    }
   };
+
+  const fetchRecipes = useCallback(
+    async (query: string) => {
+      if (query.length > 0) {
+        const results = await mockRecipesRequest(query);
+        setRecipes(results.meals);
+        setSelectedIndex(0);
+      } else {
+        setRecipes([]);
+        setSelectedIndex(null);
+      }
+    },
+    [setRecipes, setSelectedIndex],
+  );
+
+  useEffect(() => {
+    fetchRecipes(debouncedQuery);
+  }, [fetchRecipes, debouncedQuery]);
 
   const handleClear = useCallback(() => {
     setQuery("");
