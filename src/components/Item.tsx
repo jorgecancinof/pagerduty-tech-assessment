@@ -7,23 +7,28 @@ interface Props {
   onItemClick: () => void;
 }
 
-export const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
-  const highlightText = (text: string) => {
-    const regex = new RegExp(`(${query})`, "gi");
-    return text.split(regex).map((part, index) =>
-      regex.test(part) ? (
+const highlightText = (text: string, query: string) => {
+  if (!query) return text;
+
+  const regex = new RegExp(`(${query})`, "gi");
+
+  return text.split(regex).map((part, index) => {
+    if (regex.test(part)) {
+      return (
         <span key={index} className="highlight">
           {part}
         </span>
-      ) : (
-        <React.Fragment key={index}>{part}</React.Fragment>
-      ),
-    );
-  };
+      );
+    } else {
+      return part;
+    }
+  });
+};
 
+export const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
   return (
     <button className="list__button" onClick={onItemClick} type="button">
-      <h3>{highlightText(recipe.strMeal)}</h3>
+      <h3>{highlightText(recipe.strMeal, query)}</h3>
       <p>
         {recipe.strArea} / {recipe.strCategory}
       </p>
