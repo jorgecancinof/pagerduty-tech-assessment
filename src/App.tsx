@@ -3,7 +3,8 @@ import { Search } from "./components/Search";
 import { RecipeDisplay } from "./components/RecipeDisplay";
 import { Recipe } from "./types/Recipe";
 import useDebounce from "./hooks/useDebounce.ts";
-import IconClose from "./components/icons/IconClose.tsx";
+import KeyboardHint from "./components/KeyboardHint.tsx";
+import CloseDetailsButton from "./components/CloseDetailsButton.tsx";
 
 const QUERY_DEBOUNCE_DELAY_MS = 500;
 
@@ -29,15 +30,7 @@ export const App: React.FC = () => {
 
   return (
     <main className={`app ${showMobileDetails ? "app--mobile-show-item" : ""}`}>
-      <button
-        className="details__close-button"
-        title="Close"
-        aria-label="Close"
-        type="button"
-        onClick={() => handleShowMobileDetails(false)}
-      >
-        <IconClose />
-      </button>
+      <CloseDetailsButton onClick={() => handleShowMobileDetails(false)} />
       <Search
         query={query}
         setQuery={setQuery}
@@ -55,6 +48,7 @@ export const App: React.FC = () => {
         focusSearchInput={focusSearchInput}
         handleShowMobileDetails={handleShowMobileDetails}
       />
+      <KeyboardHint />
     </main>
   );
 };
