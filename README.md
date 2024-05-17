@@ -1,30 +1,46 @@
-# React + TypeScript + Vite
+# PagerDuty Coding Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## React Autocomplete App
 
-Currently, two official plugins are available:
+This project is an autocomplete search app built using React, TypeScript, and Vite. It showcases an autocomplete
+component that allows users to search for cooking recipes. It doesn't use third-party libraries for the core
+functionality, and emphasizes an excellent user experience with responsive design for both mobile and desktop views.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **No Third-party Libraries:** Built-in logic for autocomplete functionality without external dependencies.
+- **Responsive Design:** Fully responsive, ensuring a great user experience on both desktop and mobile devices.
+- **Keyboard Navigation:** Users can navigate through the autocomplete suggestions using the arrow keys and clear the
+  search input with the escape key.
+- **Text Highlighting:** Autocomplete suggestions highlight the part of the text that matches the user's input.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies used
 
-- Configure the top-level `parserOptions` property like this:
+- React 18
+- TypeScript
+- Vite
+- CSS for styling
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Setup and running the project
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Prerequisites
+
+Ensure you have the latest LTS version of Node.js installed.
+
+### Installation
+
+1. Clone the repository.
+
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
+
+### Running the project
+
+1. To start the development server:
+   ```bash
+   npm run dev
+   ```
+
+2. Open the localhost URL shown in the terminal to view the app.
