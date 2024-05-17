@@ -58,12 +58,12 @@ export const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
       onClick={onItemClick}
       type="button"
     >
-      <span className="list__button-subtitle">
+      <p className="list__button-subtitle">
         {recipe.strArea} / {recipe.strCategory}
-      </span>
-      <strong className="list__button-title">
+      </p>
+      <h2 className="list__button-title">
         {highlightText(recipe.strMeal, query)}
-      </strong>
+      </h2>
     </button>
   );
 };
