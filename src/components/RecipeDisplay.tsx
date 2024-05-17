@@ -12,6 +12,7 @@ interface RecipeDisplayProps {
   selectedIndex: number | null;
   setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>;
   focusSearchInput: () => void;
+  handleShowMobileDetails: (show: boolean) => void;
 }
 
 export const RecipeDisplay: React.FC<RecipeDisplayProps> = ({
@@ -21,6 +22,7 @@ export const RecipeDisplay: React.FC<RecipeDisplayProps> = ({
   selectedIndex,
   setSelectedIndex,
   focusSearchInput,
+  handleShowMobileDetails,
 }) => {
   const { isLoading, isError } = useFetch<RecipeResponse>({
     input: `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
@@ -50,6 +52,7 @@ export const RecipeDisplay: React.FC<RecipeDisplayProps> = ({
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
         focusSearchInput={focusSearchInput}
+        handleShowMobileDetails={handleShowMobileDetails}
       />
       {selectedIndex !== null && <Details recipe={recipes[selectedIndex]} />}
     </>

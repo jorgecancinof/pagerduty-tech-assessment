@@ -8,6 +8,7 @@ interface Props {
   selectedIndex: number | null;
   setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>;
   focusSearchInput: () => void;
+  handleShowMobileDetails: (show: boolean) => void;
 }
 
 export const List: React.FC<Props> = ({
@@ -16,6 +17,7 @@ export const List: React.FC<Props> = ({
   selectedIndex,
   setSelectedIndex,
   focusSearchInput,
+  handleShowMobileDetails,
 }) => {
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -42,6 +44,7 @@ export const List: React.FC<Props> = ({
             recipe={recipe}
             query={query}
             onItemClick={() => {
+              handleShowMobileDetails(true);
               setSelectedIndex(index);
               focusSearchInput();
             }}

@@ -1,3 +1,16 @@
+:root {
+    --color-primary: #CC2B53;
+    --color-secondary: #ff9db6;
+    --color-background: #ffffff;
+    --color-placeholder: #b3b3b3;
+    --color-text: #333333;
+}
+
+::placeholder {
+    color: var(--color-placeholder);
+    opacity: 1;
+}
+
 *,
 *::before,
 *::after {
@@ -17,7 +30,8 @@ body {
     place-content: center;
     min-height: 100vh;
     font-size: 1.6rem;
-    background-color: pink;
+    color: var(--color-text);
+    background-color: hsl(0, 0%, 95%);
 }
 
 input, button {
@@ -38,7 +52,7 @@ input, button {
     width: 100vw;
     height: 100vh;
     border-radius: 2rem;
-    background-color: white;
+    background-color: var(--color-background);
     overflow: hidden;
     box-shadow: hsla(0, 0%, 0%, 0.56) 0 2.2rem 7rem 4px;
 }
@@ -52,6 +66,7 @@ input, button {
     width: 100%;
     border: none;
     font-size: 2.5rem;
+    background: transparent;
 }
 
 .search__input:focus {
@@ -88,7 +103,7 @@ input, button {
     width: 100%;
     min-height: 20rem;
     padding: 2rem;
-    border: 1rem solid white;
+    border: 1rem solid var(--color-background);
     border-radius: 2rem;
     background-size: cover;
     background-position: center;
@@ -100,11 +115,11 @@ input, button {
 
 .list__button:hover,
 .list__button:focus {
-    border-color: lightgray;
+    border-color: var(--color-secondary);
 }
 
 .list__item[aria-selected="true"] .list__button {
-    border-color: hotpink;
+    border-color: var(--color-primary);
 }
 
 .list__button-title {
@@ -130,6 +145,10 @@ input, button {
 
 .details {
     overflow-y: auto;
+}
+
+.details__close-button {
+    display: none;
 }
 
 .details__header {
@@ -160,9 +179,9 @@ input, button {
 
 .details__ingredients {
     margin-top: -5rem;
-    padding: 3rem 4rem 8rem;
+    padding: 3rem 4rem 9rem;
     border-radius: 5rem 5rem 0 0;
-    background-color: white;
+    background-color: var(--color-background);
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
@@ -187,10 +206,10 @@ input, button {
 
 .details__instructions {
     margin-top: -5rem;
-    padding: 3rem 4rem;
+    padding: 3rem 4rem 6rem;
     border-radius: 5rem 5rem 0 0;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px 0px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -16px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -36px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    background-color: var(--color-background);
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 .details__instructions-title {
@@ -218,7 +237,7 @@ input, button {
 
 .highlight {
     border-radius: .5rem;
-    background-color: hotpink;
+    background-color: var(--color-primary);
 }
 
 /* Checkbox */
@@ -247,8 +266,8 @@ input, button {
 }
 
 .checkbox__input:checked + .checkbox__label .checkbox__checkmark {
-    border-color: hotpink;
-    background-color: hotpink;
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
 }
 
 .checkbox__checkmark::after {
@@ -282,4 +301,73 @@ input, button {
     font-size: 1.4rem;
     font-weight: 200;
     color: gray;
+}
+
+@media screen and (max-width: 768px) {
+    .app {
+        grid-template-rows: minmax(6rem, auto) 1fr;
+        grid-template-columns: 1fr;
+        width: 100vw;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        min-height: 100dvh;
+        border-radius: 0;
+    }
+
+    @supports not (min-height: 100dvh) {
+        .app {
+            min-height: 100vh;
+        }
+    }
+
+    .app--mobile-show-item.app {
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr;
+    }
+
+    .search {
+        grid-column: 1 / -1;
+    }
+
+    .app--mobile-show-item .search {
+        display: none;
+    }
+
+    .app--mobile-show-item .list {
+        display: none;
+    }
+
+    .details {
+        display: none;
+    }
+
+    .app--mobile-show-item .details {
+        display: block;
+    }
+
+    .details__header {
+        min-height: 50rem;
+    }
+
+    .app--mobile-show-item .details__close-button {
+        display: grid;
+        place-content: center;
+        position: absolute;
+        top: 2rem;
+        right: 0;
+        padding: 1rem;
+        font-size: 4rem;
+        border: none;
+        border-radius: 50% 0 0 50%;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .message-display {
+        align-content: start;
+        height: 100vh;
+    }
 }

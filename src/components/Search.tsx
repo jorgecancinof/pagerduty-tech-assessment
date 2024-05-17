@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import IconSearch from "./icons/IconSearch.tsx";
-import IconCloseCircle from "./icons/IconCloseCircle.tsx";
+import IconClose from "./icons/IconClose.tsx";
 
 interface Props {
   query: string;
@@ -105,7 +105,7 @@ export const Search: React.FC<Props> = ({
           className="search__clear"
           onClick={handleClear}
         >
-          <IconCloseCircle />
+          <IconClose />
         </button>
       )}
     </form>
