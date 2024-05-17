@@ -5,13 +5,13 @@ import IconClose from "./icons/IconClose.tsx";
 interface Props {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
-  setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
   searchInputRef: React.RefObject<HTMLInputElement>;
   focusSearchInput: () => void;
   totalItemsCount: number;
 }
 
-export const Search: React.FC<Props> = ({
+const Search: React.FC<Props> = ({
   query,
   setQuery,
   setSelectedIndex,
@@ -95,6 +95,9 @@ export const Search: React.FC<Props> = ({
         onKeyDown={handleSearchInputKeyDown}
         ref={searchInputRef}
         maxLength={50}
+        spellCheck={false}
+        autoComplete="off"
+        enterKeyHint="search"
         autoFocus
       />
       {query.length > 0 && (
@@ -111,3 +114,5 @@ export const Search: React.FC<Props> = ({
     </form>
   );
 };
+
+export default Search;

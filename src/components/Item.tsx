@@ -46,7 +46,7 @@ const highlightText = (text: string, query: string) => {
   }
 };
 
-export const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
+const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
   const mealThumbImg = recipe.strMealThumb ?? placeholderMeal;
 
   return (
@@ -67,3 +67,5 @@ export const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
     </button>
   );
 };
+
+export default Item;

@@ -4,9 +4,7 @@ import IconClose from "./icons/IconClose.tsx";
 function KeyboardHint() {
   const [show, setShow] = useState(true);
 
-  if (!show) {
-    return null;
-  }
+  if (!show) return null;
 
   return (
     <div className="keyboard-hint">

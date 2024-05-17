@@ -9,11 +9,20 @@ interface UseFetchOptions<T> {
 
 interface UseFetchResult<T> {
   data: T | undefined;
+  status: string;
+  isIdle: boolean;
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
   error: Error | null;
 }
+
+export const FETCH_STATUS = {
+  IDLE: "idle",
+  LOADING: "loading",
+  SUCCESS: "success",
+  ERROR: "error",
+};
 
 function useFetch<T>({
   input,
@@ -22,9 +31,7 @@ function useFetch<T>({
   onError,
 }: UseFetchOptions<T>): UseFetchResult<T> {
   const [data, setData] = useState<T>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [status, setStatus] = useState(FETCH_STATUS.IDLE);
   const [error, setError] = useState<Error | null>(null);
 
   const onSuccessRef = useRef(onSuccess);
@@ -47,9 +54,8 @@ function useFetch<T>({
 
         if (!response.ok) {
           const errorMessage = `HTTP error status: ${response.status}`;
+          setStatus(FETCH_STATUS.ERROR);
           setError(new Error(errorMessage));
-          setIsError(true);
-          setIsSuccess(false);
           onErrorRef.current?.(new Error(errorMessage));
           return;
         }
@@ -57,25 +63,19 @@ function useFetch<T>({
         const responseData = await response.json();
         setData(responseData);
         setError(null);
-        setIsError(false);
-        setIsSuccess(true);
+        setStatus(FETCH_STATUS.SUCCESS);
         onSuccessRef.current?.(responseData);
       } catch (error: unknown) {
         if (error instanceof Error && error.name !== "AbortError") {
+          setStatus(FETCH_STATUS.ERROR);
           setError(error);
-          setIsError(true);
-          setIsSuccess(false);
           onErrorRef.current?.(error);
         }
-      } finally {
-        setIsLoading(false);
       }
     };
 
     setError(null);
-    setIsError(false);
-    setIsLoading(true);
-    setIsSuccess(false);
+    setStatus(FETCH_STATUS.LOADING);
     fetchData();
 
     return () => {
@@ -83,7 +83,12 @@ function useFetch<T>({
     };
   }, [input, options]);
 
-  return { data, isLoading, isSuccess, isError, error };
+  const isIdle = status === FETCH_STATUS.IDLE;
+  const isError = status === FETCH_STATUS.ERROR;
+  const isLoading = status === FETCH_STATUS.LOADING;
+  const isSuccess = status === FETCH_STATUS.SUCCESS;
+
+  return { data, status, isIdle, isLoading, isSuccess, isError, error };
 }
 
 export default useFetch;

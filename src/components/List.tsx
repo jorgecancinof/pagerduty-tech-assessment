@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from "react";
-import { Item } from "./Item";
+import Item from "./Item";
 import { Recipe } from "../types/Recipe";
 
 interface Props {
   recipes: Recipe[];
   query: string;
-  selectedIndex: number | null;
-  setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  selectedIndex: number;
+  setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
   focusSearchInput: () => void;
   handleShowMobileDetails: (show: boolean) => void;
 }
 
-export const List: React.FC<Props> = ({
+const List: React.FC<Props> = ({
   recipes,
   query,
   selectedIndex,
@@ -54,3 +54,5 @@ export const List: React.FC<Props> = ({
     </ul>
   );
 };
+
+export default List;
