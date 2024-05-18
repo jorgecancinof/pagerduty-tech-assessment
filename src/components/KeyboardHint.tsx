@@ -7,7 +7,7 @@ function KeyboardHint() {
   if (!show) return null;
 
   return (
-    <div className="keyboard-hint">
+    <section className="keyboard-hint" aria-label="Keyboard hint">
       <p className="keyboard-hint__message">
         Use <kbd className="keyboard-hint__key">↓</kbd> and{" "}
         <kbd className="keyboard-hint__key">↑</kbd> to navigate and{" "}
@@ -22,7 +22,7 @@ function KeyboardHint() {
       >
         <IconClose />
       </button>
-    </div>
+    </section>
   );
 }
 

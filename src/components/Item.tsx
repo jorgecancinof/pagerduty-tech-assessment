@@ -32,9 +32,9 @@ const highlightText = (text: string, query: string) => {
 
       if (regex.test(part)) {
         return (
-          <span key={index} className="highlight">
+          <mark key={index} className="highlight">
             {text.slice(startIndex, endIndex)}
-          </span>
+          </mark>
         );
       } else {
         return text.slice(startIndex, endIndex);

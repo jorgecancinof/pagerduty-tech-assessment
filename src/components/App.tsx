@@ -2,6 +2,8 @@ import React, { useState, useCallback, useEffect } from "react";
 import useFetch from "../hooks/useFetch.ts";
 import useDebounce from "../hooks/useDebounce.ts";
 import Search from "./Search";
+import ErrorDisplay from "./ErrorDisplay.tsx";
+import LoadingDisplay from "./LoadingDisplay.tsx";
 import MessageDisplay from "./MessageDisplay.tsx";
 import RecipeDisplay from "./RecipeDisplay";
 import KeyboardHint from "./KeyboardHint.tsx";
@@ -44,11 +46,11 @@ const App: React.FC = () => {
 
   const result = () => {
     if (isError) {
-      return <MessageDisplay>Error</MessageDisplay>;
+      return <ErrorDisplay />;
     }
 
     if (isLoading || recipes === null) {
-      return <MessageDisplay>Loading...</MessageDisplay>;
+      return <LoadingDisplay />;
     }
 
     if (recipes.length === 0) {
