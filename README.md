@@ -1,10 +1,18 @@
-# PagerDuty Coding Challenge
+# PagerDuty Tech Assessment
 
 ## React Autocomplete App
 
 This project is an autocomplete search app built using React, TypeScript, and Vite. It showcases an autocomplete
 component that allows users to search for cooking recipes. It doesn't use third-party libraries for the core
 functionality, and emphasizes an excellent user experience with responsive design for both mobile and desktop views.
+
+<p align="center">
+  <img src="docs/screenshot-desktop.jpg" width="800" alt="Screenshot desktop" />
+</p>
+
+<p align="center">
+  <img src="docs/screenshot-mobile.png" width="800" alt="Screenshot mobile" />
+</p>
 
 ## Features
 
