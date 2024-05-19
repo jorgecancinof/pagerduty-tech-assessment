@@ -21,8 +21,8 @@ function List({
 }: Props) {
   const listRef = useRef<HTMLUListElement>(null);
 
-  function scrollToSelectedItem(selectedIndex: number | null) {
-    if (selectedIndex !== null && listRef.current) {
+  function scrollToSelectedItem(selectedIndex: number) {
+    if (listRef.current) {
       const selectedItem = listRef.current.children[selectedIndex];
       selectedItem?.scrollIntoView({ block: "nearest" });
     }

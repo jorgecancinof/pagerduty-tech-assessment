@@ -19,15 +19,6 @@ function Search({
   focusSearchInput,
   totalItemsCount,
 }: Props) {
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
-  const handleClear = useCallback(() => {
-    setQuery("");
-    focusSearchInput();
-  }, [setQuery, focusSearchInput]);
-
   function handleSearchInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     setQuery(value);
@@ -43,19 +34,24 @@ function Search({
       event.preventDefault();
 
       setSelectedIndex((prevIndex) => {
+        const firstIndex = 0;
         const lastIndex = totalItemsCount - 1;
-        const isFirstItem = prevIndex === 0;
+        const isFirstItem = prevIndex === firstIndex;
         const isLastItem = prevIndex === lastIndex;
-        const isNoSelection = prevIndex === null;
 
         if (isArrowDown) {
-          return isNoSelection || isLastItem ? 0 : prevIndex + 1;
+          return isLastItem ? firstIndex : prevIndex + 1;
         } else {
-          return isNoSelection || isFirstItem ? lastIndex : prevIndex - 1;
+          return isFirstItem ? lastIndex : prevIndex - 1;
         }
       });
     }
   }
+
+  const handleClear = useCallback(() => {
+    setQuery("");
+    focusSearchInput();
+  }, [setQuery, focusSearchInput]);
 
   const handleDocumentKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -73,6 +69,10 @@ function Search({
       document.removeEventListener("keydown", handleDocumentKeyDown);
     };
   }, [handleDocumentKeyDown]);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+  }
 
   return (
     <form className="search" onSubmit={handleSubmit}>

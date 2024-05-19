@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo } from "react";
 import useFetch from "../hooks/useFetch.ts";
 import List from "./List";
 import Details from "./Details";
@@ -34,10 +34,6 @@ function RecipeDisplay({
     },
   });
 
-  useEffect(() => {
-    if (isLoading) setRecipes(null);
-  }, [isLoading, setRecipes]);
-
   if (isError) {
     return <ErrorDisplay />;
   }
@@ -65,4 +61,5 @@ function RecipeDisplay({
   );
 }
 
-export default RecipeDisplay;
+const MemoizedRecipeDisplay = memo(RecipeDisplay);
+export default MemoizedRecipeDisplay;
