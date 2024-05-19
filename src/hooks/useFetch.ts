@@ -45,7 +45,7 @@ function useFetch<T>({
   useEffect(() => {
     const abortController = new AbortController();
 
-    const fetchData = async () => {
+    async function fetchData() {
       try {
         const response = await fetch(input, {
           ...options,
@@ -72,7 +72,7 @@ function useFetch<T>({
           onErrorRef.current?.(error);
         }
       }
-    };
+    }
 
     setError(null);
     setStatus(FETCH_STATUS.LOADING);

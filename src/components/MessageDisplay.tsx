@@ -4,8 +4,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-const MessageDisplay: React.FC<Props> = ({ children }) => {
+function MessageDisplay({ children }: Props) {
   return <div className="message-display">{children}</div>;
-};
+}
 
 export default MessageDisplay;

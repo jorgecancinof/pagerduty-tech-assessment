@@ -1,4 +1,3 @@
-import React from "react";
 import placeholderMeal from "../assets/placeholder-meal.png";
 import { Recipe } from "../types/Recipe.ts";
 
@@ -8,15 +7,15 @@ interface Props {
   onItemClick: () => void;
 }
 
-const normalizeText = (text: string) => {
+function normalizeText(text: string) {
   return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-};
+}
 
-const escapeRegExp = (text: string) => {
+function escapeRegExp(text: string) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-};
+}
 
-const highlightText = (text: string, query: string) => {
+function highlightText(text: string, query: string) {
   if (!query) return text;
 
   try {
@@ -44,9 +43,9 @@ const highlightText = (text: string, query: string) => {
     console.error("Error in highlightText function:", error);
     return text;
   }
-};
+}
 
-const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
+function Item({ recipe, query, onItemClick }: Props) {
   const mealThumbImg = recipe.strMealThumb ?? placeholderMeal;
 
   return (
@@ -66,6 +65,6 @@ const Item: React.FC<Props> = ({ recipe, query, onItemClick }) => {
       </h2>
     </button>
   );
-};
+}
 
 export default Item;

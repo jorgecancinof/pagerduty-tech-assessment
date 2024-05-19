@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 import useDebounce from "../hooks/useDebounce.ts";
 import Search from "./Search";
 import RecipeDisplay from "./RecipeDisplay";
@@ -8,7 +8,7 @@ import { Recipe } from "../types/Recipe";
 
 const QUERY_DEBOUNCE_DELAY_MS = 500;
 
-const App: React.FC = () => {
+function App() {
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, QUERY_DEBOUNCE_DELAY_MS);
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
@@ -51,6 +51,6 @@ const App: React.FC = () => {
       <KeyboardHint />
     </main>
   );
-};
+}
 
 export default App;

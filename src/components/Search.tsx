@@ -11,33 +11,31 @@ interface Props {
   totalItemsCount: number;
 }
 
-const Search: React.FC<Props> = ({
+function Search({
   query,
   setQuery,
   setSelectedIndex,
   searchInputRef,
   focusSearchInput,
   totalItemsCount,
-}) => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+}: Props) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-  };
+  }
 
   const handleClear = useCallback(() => {
     setQuery("");
     focusSearchInput();
   }, [setQuery, focusSearchInput]);
 
-  const handleSearchInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  function handleSearchInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     setQuery(value);
-  };
+  }
 
-  const handleSearchInputKeyDown = (
+  function handleSearchInputKeyDown(
     event: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
+  ) {
     const isArrowUp = event.key === "ArrowUp";
     const isArrowDown = event.key === "ArrowDown";
 
@@ -57,7 +55,7 @@ const Search: React.FC<Props> = ({
         }
       });
     }
-  };
+  }
 
   const handleDocumentKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -113,6 +111,6 @@ const Search: React.FC<Props> = ({
       )}
     </form>
   );
-};
+}
 
 export default Search;

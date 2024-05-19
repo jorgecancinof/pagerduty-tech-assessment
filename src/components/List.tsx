@@ -11,22 +11,22 @@ interface Props {
   handleShowMobileDetails: (show: boolean) => void;
 }
 
-const List: React.FC<Props> = ({
+function List({
   recipes,
   query,
   selectedIndex,
   setSelectedIndex,
   focusSearchInput,
   handleShowMobileDetails,
-}) => {
+}: Props) {
   const listRef = useRef<HTMLUListElement>(null);
 
-  const scrollToSelectedItem = (selectedIndex: number | null) => {
+  function scrollToSelectedItem(selectedIndex: number | null) {
     if (selectedIndex !== null && listRef.current) {
       const selectedItem = listRef.current.children[selectedIndex];
       selectedItem?.scrollIntoView({ block: "nearest" });
     }
-  };
+  }
 
   useEffect(() => {
     scrollToSelectedItem(selectedIndex);
@@ -53,6 +53,6 @@ const List: React.FC<Props> = ({
       ))}
     </ul>
   );
-};
+}
 
 export default List;

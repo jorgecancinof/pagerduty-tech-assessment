@@ -1,9 +1,9 @@
 import React from "react";
 import IconClose from "./icons/IconClose";
 
-const CloseDetailsButton: React.FC<
-  React.ButtonHTMLAttributes<HTMLButtonElement>
-> = ({ ...props }) => {
+function CloseDetailsButton({
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       className="details__close-button"
@@ -15,6 +15,6 @@ const CloseDetailsButton: React.FC<
       <IconClose />
     </button>
   );
-};
+}
 
 export default CloseDetailsButton;

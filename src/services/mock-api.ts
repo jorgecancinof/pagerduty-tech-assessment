@@ -3,7 +3,7 @@ import mockData from "./mock-api-response.json";
 
 const MOCK_RESPONSE_DELAY_MS = 500;
 
-export const mockRecipesRequest = (query: string): Promise<RecipeResponse> => {
+export function mockRecipesRequest(query: string): Promise<RecipeResponse> {
   return new Promise((resolve) => {
     setTimeout(() => {
       const unfilteredRecipes = mockData.meals;
@@ -15,4 +15,4 @@ export const mockRecipesRequest = (query: string): Promise<RecipeResponse> => {
       resolve({ meals: filteredRecipes });
     }, MOCK_RESPONSE_DELAY_MS);
   });
-};
+}

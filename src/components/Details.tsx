@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import placeholderMeal from "../assets/placeholder-meal.png";
 import { Recipe } from "../types/Recipe.ts";
 
@@ -31,7 +31,7 @@ function getExistingIngredients(recipe: Recipe): Ingredient[] {
   return ingredients;
 }
 
-const Details: React.FC<Props> = ({ recipe }) => {
+function Details({ recipe }: Props) {
   const mealThumbImg = recipe.strMealThumb ?? placeholderMeal;
 
   const ingredients = useMemo(() => {
@@ -76,6 +76,6 @@ const Details: React.FC<Props> = ({ recipe }) => {
       </section>
     </div>
   );
-};
+}
 
 export default Details;

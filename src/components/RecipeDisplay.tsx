@@ -17,7 +17,7 @@ interface RecipeDisplayProps {
   handleShowMobileDetails: (show: boolean) => void;
 }
 
-const RecipeDisplay: React.FC<RecipeDisplayProps> = ({
+function RecipeDisplay({
   query,
   recipes,
   setRecipes,
@@ -25,7 +25,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({
   setSelectedIndex,
   focusSearchInput,
   handleShowMobileDetails,
-}) => {
+}: RecipeDisplayProps) {
   const { isLoading, isError } = useFetch<RecipeResponse>({
     input: `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
     onSuccess: (data) => {
@@ -63,6 +63,6 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({
       <Details recipe={recipes[selectedIndex]} />
     </>
   );
-};
+}
 
 export default RecipeDisplay;
