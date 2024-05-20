@@ -3,7 +3,7 @@ import { Recipe } from "../types/Recipe.ts";
 
 interface Props {
   recipe: Recipe;
-  query: string;
+  highlightedText: string;
   onItemClick: () => void;
 }
 
@@ -45,7 +45,7 @@ function highlightText(text: string, query: string) {
   }
 }
 
-function Item({ recipe, query, onItemClick }: Props) {
+function Item({ recipe, highlightedText, onItemClick }: Props) {
   const mealThumbImg = recipe.strMealThumb ?? placeholderMeal;
 
   return (
@@ -61,7 +61,7 @@ function Item({ recipe, query, onItemClick }: Props) {
         {recipe.strArea} / {recipe.strCategory}
       </p>
       <h2 className="list__button-title">
-        {highlightText(recipe.strMeal, query)}
+        {highlightText(recipe.strMeal, highlightedText)}
       </h2>
     </button>
   );

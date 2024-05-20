@@ -38,6 +38,11 @@ function useFetch<T>({
   const onErrorRef = useRef(onError);
 
   useEffect(() => {
+    onSuccessRef.current = onSuccess;
+    onErrorRef.current = onError;
+  }, [onSuccess, onError]);
+
+  useEffect(() => {
     const abortController = new AbortController();
 
     async function fetchData() {

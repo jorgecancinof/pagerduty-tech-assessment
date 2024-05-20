@@ -4,7 +4,7 @@ import { Recipe } from "../types/Recipe";
 
 interface Props {
   recipes: Recipe[];
-  query: string;
+  highlightedText: string;
   selectedIndex: number;
   setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
   focusSearchInput: () => void;
@@ -13,7 +13,7 @@ interface Props {
 
 function List({
   recipes,
-  query,
+  highlightedText,
   selectedIndex,
   setSelectedIndex,
   focusSearchInput,
@@ -42,7 +42,7 @@ function List({
         >
           <Item
             recipe={recipe}
-            query={query}
+            highlightedText={highlightedText}
             onItemClick={() => {
               handleShowMobileDetails(true);
               setSelectedIndex(index);

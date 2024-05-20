@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { useState, memo } from "react";
 import useFetch from "../hooks/useFetch.ts";
 import List from "./List";
 import Details from "./Details";
@@ -26,11 +26,13 @@ function RecipeDisplay({
   focusSearchInput,
   handleShowMobileDetails,
 }: RecipeDisplayProps) {
+  const [highlightedText, setHighlightedText] = useState(query);
   const { isLoading, isError } = useFetch<RecipeResponse>({
     input: `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
     onSuccess: (data) => {
       setRecipes(data.meals ?? []);
       setSelectedIndex(0);
+      setHighlightedText(query);
     },
   });
 
@@ -50,7 +52,7 @@ function RecipeDisplay({
     <>
       <List
         recipes={recipes}
-        query={query}
+        highlightedText={highlightedText}
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
         focusSearchInput={focusSearchInput}
