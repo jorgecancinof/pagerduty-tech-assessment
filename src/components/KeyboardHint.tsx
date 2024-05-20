@@ -16,8 +16,8 @@ function KeyboardHint() {
       <button
         className="keyboard-hint__close-button"
         type="button"
-        title="Close"
-        aria-label="Close"
+        title="Close keyboard hint"
+        aria-label="Close keyboard hint"
         onClick={() => setShow(false)}
       >
         <IconClose />

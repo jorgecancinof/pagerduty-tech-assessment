@@ -7,6 +7,7 @@ function IconClose(props: React.SVGProps<SVGSVGElement>) {
       fill="currentColor"
       height="1em"
       width="1em"
+      aria-hidden="true"
       {...props}
     >
       <path

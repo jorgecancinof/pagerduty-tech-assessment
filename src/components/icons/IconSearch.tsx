@@ -11,6 +11,7 @@ function IconSearch(props: React.SVGProps<SVGSVGElement>) {
       viewBox="0 0 24 24"
       height="1em"
       width="1em"
+      aria-hidden="true"
       {...props}
     >
       <path d="M19 11 A8 8 0 0 1 11 19 A8 8 0 0 1 3 11 A8 8 0 0 1 19 11 z" />

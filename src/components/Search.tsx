@@ -101,8 +101,8 @@ function Search({
       {query.length > 0 && (
         <button
           type="reset"
-          title="Clear"
-          aria-label="Clear"
+          title="Clear search"
+          aria-label="Clear search"
           className="search__clear"
           onClick={handleClear}
         >

@@ -7,8 +7,8 @@ function CloseDetailsButton(
   return (
     <button
       className="details__close-button"
-      title="Close"
-      aria-label="Close"
+      title="Close this recipe"
+      aria-label="Close this recipe"
       type="button"
       {...props}
     >
