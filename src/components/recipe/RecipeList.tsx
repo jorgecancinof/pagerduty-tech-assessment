@@ -1,31 +1,29 @@
 import React, { useEffect, useRef } from "react";
-import Item from "./Item";
-import { Recipe } from "../types/Recipe";
+import RecipeItem from "./RecipeItem";
+import { Recipe } from "../../types/recipe";
 
-interface Props {
+interface RecipeListProps {
   recipes: Recipe[];
-  highlightedText: string;
+  highlightedTerm: string;
   selectedIndex: number;
   setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
   focusSearchInput: () => void;
-  handleShowMobileDetails: (show: boolean) => void;
+  handleShowRecipeOnMobile: (show: boolean) => void;
 }
 
-function List({
+function RecipeList({
   recipes,
-  highlightedText,
+  highlightedTerm,
   selectedIndex,
   setSelectedIndex,
   focusSearchInput,
-  handleShowMobileDetails,
-}: Props) {
+  handleShowRecipeOnMobile,
+}: RecipeListProps) {
   const listRef = useRef<HTMLUListElement>(null);
 
   function scrollToSelectedItem(selectedIndex: number) {
-    if (listRef.current) {
-      const selectedItem = listRef.current.children[selectedIndex];
-      selectedItem?.scrollIntoView({ block: "nearest" });
-    }
+    const selectedItem = listRef.current?.children[selectedIndex];
+    selectedItem?.scrollIntoView({ block: "nearest" });
   }
 
   useEffect(() => {
@@ -40,11 +38,11 @@ function List({
           className="list__item"
           aria-selected={index === selectedIndex}
         >
-          <Item
+          <RecipeItem
             recipe={recipe}
-            highlightedText={highlightedText}
+            highlightedTerm={highlightedTerm}
             onItemClick={() => {
-              handleShowMobileDetails(true);
+              handleShowRecipeOnMobile(true);
               setSelectedIndex(index);
               focusSearchInput();
             }}
@@ -55,4 +53,4 @@ function List({
   );
 }
 
-export default List;
+export default RecipeList;

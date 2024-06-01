@@ -50,7 +50,7 @@ input, button {
     grid-template-rows: minmax(6rem, auto) 1fr;
     grid-template-columns: 0.8fr 1fr;
     position: relative;
-    max-width: 1200px;
+    max-width: 120rem;
     max-height: 80rem;
     width: 100vw;
     height: 100vh;
@@ -84,7 +84,7 @@ input, button {
     font-size: 2.5rem;
 }
 
-.search__clear {
+.search__clear-button {
     display: grid;
     place-content: center;
     padding: 0 1.5rem;
@@ -237,7 +237,7 @@ input, button {
     line-height: 1.8;
 }
 
-.message-display {
+.browser-container {
     grid-column: 1 / -1;
     display: grid;
     place-content: center;
@@ -386,7 +386,7 @@ input, button {
     transform-origin: 4rem 4rem;
     animation: loading__spinner 1.2s linear infinite;
 }
-.loading__spinner div:after {
+.loading__spinner div::after {
     content: " ";
     display: block;
     position: absolute;
@@ -473,7 +473,7 @@ input, button {
         }
     }
 
-    .app--mobile-show-item.app {
+    .app--show-recipe-mobile.app {
         grid-template-rows: 1fr;
         grid-template-columns: 1fr;
     }
@@ -482,7 +482,7 @@ input, button {
         grid-column: 1 / -1;
     }
 
-    .app--mobile-show-item .search {
+    .app--show-recipe-mobile .search {
         display: none;
     }
 
@@ -490,7 +490,7 @@ input, button {
         border-right: none;
     }
 
-    .app--mobile-show-item .list {
+    .app--show-recipe-mobile .list {
         display: none;
     }
 
@@ -498,7 +498,7 @@ input, button {
         display: none;
     }
 
-    .app--mobile-show-item .details {
+    .app--show-recipe-mobile .details {
         display: block;
     }
 
@@ -506,7 +506,7 @@ input, button {
         min-height: 50rem;
     }
 
-    .app--mobile-show-item .details__close-button {
+    .app--show-recipe-mobile .details__close-button {
         display: grid;
         place-content: center;
         position: absolute;
@@ -523,7 +523,7 @@ input, button {
         z-index: 1;
     }
 
-    .message-display {
+    .browser-container {
         align-content: start;
         height: 100vh;
         padding: 4rem 2rem 2rem;

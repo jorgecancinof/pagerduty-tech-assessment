@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from "react";
-import IconSearch from "./icons/IconSearch.tsx";
-import IconClose from "./icons/IconClose.tsx";
+import IconSearch from "./icons/IconSearch";
+import IconClose from "./icons/IconClose";
 
-interface Props {
+interface SearchRecipeProps {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -11,14 +11,14 @@ interface Props {
   totalItemsCount: number;
 }
 
-function Search({
+function SearchRecipe({
   query,
   setQuery,
   setSelectedIndex,
   searchInputRef,
   focusSearchInput,
   totalItemsCount,
-}: Props) {
+}: SearchRecipeProps) {
   function handleSearchInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     setQuery(value);
@@ -55,9 +55,7 @@ function Search({
 
   const handleDocumentKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        handleClear();
-      }
+      if (event.key === "Escape") handleClear();
     },
     [handleClear],
   );
@@ -103,7 +101,7 @@ function Search({
           type="reset"
           title="Clear search"
           aria-label="Clear search"
-          className="search__clear"
+          className="search__clear-button"
           onClick={handleClear}
         >
           <IconClose />
@@ -113,4 +111,4 @@ function Search({
   );
 }
 
-export default Search;
+export default SearchRecipe;

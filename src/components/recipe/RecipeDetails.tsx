@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import placeholderMeal from "../assets/placeholder-meal.png";
-import { Recipe } from "../types/Recipe.ts";
+import placeholderMeal from "../../assets/placeholder-meal.png";
+import { Recipe } from "../../types/recipe";
 
-interface Props {
+interface RecipeDetailsProps {
   recipe: Recipe;
 }
 
@@ -13,10 +13,10 @@ interface Ingredient {
 }
 
 function getExistingIngredients(recipe: Recipe): Ingredient[] {
-  const recipeTotalIngredients = 20;
+  const RECIPE_TOTAL_INGREDIENTS = 20;
   const ingredients = [];
 
-  for (let i = 1; i <= recipeTotalIngredients; i++) {
+  for (let i = 1; i <= RECIPE_TOTAL_INGREDIENTS; i++) {
     const ingredient = recipe[`strIngredient${i}` as keyof Recipe] as
       | string
       | null;
@@ -31,7 +31,7 @@ function getExistingIngredients(recipe: Recipe): Ingredient[] {
   return ingredients;
 }
 
-function Details({ recipe }: Props) {
+function RecipeDetails({ recipe }: RecipeDetailsProps) {
   const mealThumbImg = recipe.strMealThumb ?? placeholderMeal;
 
   const ingredients = useMemo(() => {
@@ -78,4 +78,4 @@ function Details({ recipe }: Props) {
   );
 }
 
-export default Details;
+export default RecipeDetails;

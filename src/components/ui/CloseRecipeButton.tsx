@@ -1,7 +1,7 @@
 import React from "react";
-import IconClose from "./icons/IconClose";
+import IconClose from "../icons/IconClose";
 
-function CloseDetailsButton(
+function CloseRecipeButton(
   props: React.ButtonHTMLAttributes<HTMLButtonElement>,
 ) {
   return (
@@ -17,4 +17,4 @@ function CloseDetailsButton(
   );
 }
 
-export default CloseDetailsButton;
+export default CloseRecipeButton;

@@ -1,12 +1,14 @@
-import { RecipeResponse } from "../types/Recipe.ts";
-import mockData from "./mock-api-response.json";
+import mockRecipeData from "./mock-recipe-data.json";
+import { RecipeResponse } from "../types/recipe";
 
 const MOCK_RESPONSE_DELAY_MS = 500;
 
-export function mockRecipesRequest(query: string): Promise<RecipeResponse> {
+export function mockRecipesSearchRequest(
+  query: string,
+): Promise<RecipeResponse> {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const unfilteredRecipes = mockData.meals;
+      const unfilteredRecipes = mockRecipeData.meals;
 
       const filteredRecipes = unfilteredRecipes.filter((recipe) =>
         recipe.strMeal.toLowerCase().includes(query.toLowerCase()),

@@ -1,9 +1,9 @@
-import placeholderMeal from "../assets/placeholder-meal.png";
-import { Recipe } from "../types/Recipe.ts";
+import placeholderMeal from "../../assets/placeholder-meal.png";
+import { Recipe } from "../../types/recipe";
 
-interface Props {
+interface RecipeItemProps {
   recipe: Recipe;
-  highlightedText: string;
+  highlightedTerm: string;
   onItemClick: () => void;
 }
 
@@ -15,21 +15,21 @@ function escapeRegExp(text: string) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function highlightText(text: string, query: string) {
-  if (!query) return text;
+function highlightTerm(text: string, term: string) {
+  if (!term) return text;
 
   try {
     const normalizedText = normalizeText(text);
-    const normalizedQuery = normalizeText(query);
+    const normalizedTerm = normalizeText(term);
 
-    const escapedQuery = escapeRegExp(normalizedQuery);
-    const regex = new RegExp(`(${escapedQuery})`, "gi");
+    const escapedTerm = escapeRegExp(normalizedTerm);
+    const termRegex = new RegExp(`(${escapedTerm})`, "gi");
 
-    return normalizedText.split(regex).map((part, index) => {
+    return normalizedText.split(termRegex).map((part, index) => {
       const startIndex = normalizedText.indexOf(part);
       const endIndex = startIndex + part.length;
 
-      if (regex.test(part)) {
+      if (termRegex.test(part)) {
         return (
           <mark key={index} className="highlight">
             {text.slice(startIndex, endIndex)}
@@ -40,12 +40,12 @@ function highlightText(text: string, query: string) {
       }
     });
   } catch (error) {
-    console.error("Error in highlightText function:", error);
+    console.error("Error in highlightTerm function:", error);
     return text;
   }
 }
 
-function Item({ recipe, highlightedText, onItemClick }: Props) {
+function RecipeItem({ recipe, highlightedTerm, onItemClick }: RecipeItemProps) {
   const mealThumbImg = recipe.strMealThumb ?? placeholderMeal;
 
   return (
@@ -61,10 +61,10 @@ function Item({ recipe, highlightedText, onItemClick }: Props) {
         {recipe.strArea} / {recipe.strCategory}
       </p>
       <h2 className="list__button-title">
-        {highlightText(recipe.strMeal, highlightedText)}
+        {highlightTerm(recipe.strMeal, highlightedTerm)}
       </h2>
     </button>
   );
 }
 
-export default Item;
+export default RecipeItem;

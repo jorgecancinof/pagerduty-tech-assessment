@@ -1,5 +1,5 @@
 import { useState } from "react";
-import IconClose from "./icons/IconClose.tsx";
+import IconClose from "../icons/IconClose";
 
 function KeyboardHint() {
   const [show, setShow] = useState(true);

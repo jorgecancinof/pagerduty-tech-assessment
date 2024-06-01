@@ -1,10 +1,10 @@
 import { useState, useCallback, useRef } from "react";
-import useDebounce from "../hooks/useDebounce.ts";
-import Search from "./Search";
-import RecipeDisplay from "./RecipeDisplay";
-import KeyboardHint from "./KeyboardHint.tsx";
-import CloseDetailsButton from "./CloseDetailsButton.tsx";
-import { Recipe } from "../types/Recipe";
+import useDebounce from "../hooks/useDebounce";
+import SearchRecipe from "./SearchRecipe";
+import RecipeBrowser from "./RecipeBrowser";
+import KeyboardHint from "./ui/KeyboardHint";
+import CloseRecipeButton from "./ui/CloseRecipeButton";
+import { Recipe } from "../types/recipe";
 
 const QUERY_DEBOUNCE_DELAY_MS = 500;
 
@@ -13,15 +13,15 @@ function App() {
   const debouncedQuery = useDebounce(query, QUERY_DEBOUNCE_DELAY_MS);
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [showMobileDetails, setShowMobileDetails] = useState(false);
+  const [showRecipeOnMobile, setShowRecipeOnMobile] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const focusSearchInput = useCallback(() => {
     searchInputRef.current?.focus();
   }, []);
 
-  const handleShowMobileDetails = useCallback((show: boolean) => {
-    setShowMobileDetails(show);
+  const handleShowRecipeOnMobile = useCallback((show: boolean) => {
+    setShowRecipeOnMobile(show);
     window.scrollTo({
       top: 0,
       behavior: "auto",
@@ -29,9 +29,11 @@ function App() {
   }, []);
 
   return (
-    <main className={`app ${showMobileDetails ? "app--mobile-show-item" : ""}`}>
-      <CloseDetailsButton onClick={() => handleShowMobileDetails(false)} />
-      <Search
+    <main
+      className={`app ${showRecipeOnMobile ? "app--show-recipe-mobile" : ""}`}
+    >
+      <CloseRecipeButton onClick={() => handleShowRecipeOnMobile(false)} />
+      <SearchRecipe
         query={query}
         setQuery={setQuery}
         setSelectedIndex={setSelectedIndex}
@@ -39,14 +41,14 @@ function App() {
         focusSearchInput={focusSearchInput}
         totalItemsCount={recipes?.length ?? 0}
       />
-      <RecipeDisplay
+      <RecipeBrowser
         query={debouncedQuery}
         recipes={recipes}
         setRecipes={setRecipes}
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
         focusSearchInput={focusSearchInput}
-        handleShowMobileDetails={handleShowMobileDetails}
+        handleShowRecipeOnMobile={handleShowRecipeOnMobile}
       />
       <KeyboardHint />
     </main>
