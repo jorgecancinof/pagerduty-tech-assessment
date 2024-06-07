@@ -8,7 +8,7 @@ interface RecipeListProps {
   selectedIndex: number;
   setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
   focusSearchInput: () => void;
-  handleShowRecipeOnMobile: (show: boolean) => void;
+  setShowRecipeOnMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function RecipeList({
@@ -17,7 +17,7 @@ function RecipeList({
   selectedIndex,
   setSelectedIndex,
   focusSearchInput,
-  handleShowRecipeOnMobile,
+  setShowRecipeOnMobile,
 }: RecipeListProps) {
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -42,7 +42,7 @@ function RecipeList({
             recipe={recipe}
             highlightedTerm={highlightedTerm}
             onItemClick={() => {
-              handleShowRecipeOnMobile(true);
+              setShowRecipeOnMobile(true);
               setSelectedIndex(index);
               focusSearchInput();
             }}

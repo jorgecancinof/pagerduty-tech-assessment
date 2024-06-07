@@ -14,7 +14,8 @@ interface RecipeBrowserProps {
   selectedIndex: number;
   setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
   focusSearchInput: () => void;
-  handleShowRecipeOnMobile: (show: boolean) => void;
+  showRecipeOnMobile: boolean;
+  setShowRecipeOnMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function RecipeBrowser({
@@ -24,7 +25,8 @@ function RecipeBrowser({
   selectedIndex,
   setSelectedIndex,
   focusSearchInput,
-  handleShowRecipeOnMobile,
+  showRecipeOnMobile,
+  setShowRecipeOnMobile,
 }: RecipeBrowserProps) {
   const [highlightedTerm, setHighlightedTerm] = useState(query);
   const { isLoading, isError } = useFetch<RecipeResponse>({
@@ -64,9 +66,13 @@ function RecipeBrowser({
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
         focusSearchInput={focusSearchInput}
-        handleShowRecipeOnMobile={handleShowRecipeOnMobile}
+        setShowRecipeOnMobile={setShowRecipeOnMobile}
       />
-      <RecipeDetails recipe={recipes[selectedIndex]} />
+      <RecipeDetails
+        recipe={recipes[selectedIndex]}
+        showRecipeOnMobile={showRecipeOnMobile}
+        setShowRecipeOnMobile={setShowRecipeOnMobile}
+      />
     </>
   );
 }

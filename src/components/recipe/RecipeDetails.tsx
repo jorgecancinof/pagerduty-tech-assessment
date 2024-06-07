@@ -1,9 +1,12 @@
-import { useMemo } from "react";
+import React, { useLayoutEffect, useRef, useMemo } from "react";
+import CloseRecipeButton from "../ui/CloseRecipeButton";
 import placeholderMeal from "../../assets/placeholder-meal.png";
 import { Recipe } from "../../types/recipe";
 
 interface RecipeDetailsProps {
   recipe: Recipe;
+  showRecipeOnMobile: boolean;
+  setShowRecipeOnMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface Ingredient {
@@ -31,15 +34,25 @@ function getExistingIngredients(recipe: Recipe): Ingredient[] {
   return ingredients;
 }
 
-function RecipeDetails({ recipe }: RecipeDetailsProps) {
+function RecipeDetails({
+  recipe,
+  showRecipeOnMobile,
+  setShowRecipeOnMobile,
+}: RecipeDetailsProps) {
+  const detailsRef = useRef<HTMLDivElement>(null);
   const mealThumbImg = recipe.strMealThumb ?? placeholderMeal;
 
   const ingredients = useMemo(() => {
     return getExistingIngredients(recipe);
   }, [recipe]);
 
+  useLayoutEffect(() => {
+    detailsRef.current?.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [recipe, showRecipeOnMobile]);
+
   return (
-    <div className="details">
+    <div className="details" ref={detailsRef}>
+      <CloseRecipeButton onClick={() => setShowRecipeOnMobile(false)} />
       <section
         className="details__header"
         style={{

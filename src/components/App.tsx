@@ -3,7 +3,6 @@ import useDebounce from "../hooks/useDebounce";
 import SearchRecipe from "./SearchRecipe";
 import RecipeBrowser from "./RecipeBrowser";
 import KeyboardHint from "./ui/KeyboardHint";
-import CloseRecipeButton from "./ui/CloseRecipeButton";
 import { Recipe } from "../types/recipe";
 
 const QUERY_DEBOUNCE_DELAY_MS = 500;
@@ -20,19 +19,10 @@ function App() {
     searchInputRef.current?.focus();
   }, []);
 
-  const handleShowRecipeOnMobile = useCallback((show: boolean) => {
-    setShowRecipeOnMobile(show);
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
-  }, []);
-
   return (
     <main
       className={`app ${showRecipeOnMobile ? "app--show-recipe-mobile" : ""}`}
     >
-      <CloseRecipeButton onClick={() => handleShowRecipeOnMobile(false)} />
       <SearchRecipe
         query={query}
         setQuery={setQuery}
@@ -47,8 +37,9 @@ function App() {
         setRecipes={setRecipes}
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
+        showRecipeOnMobile={showRecipeOnMobile}
+        setShowRecipeOnMobile={setShowRecipeOnMobile}
         focusSearchInput={focusSearchInput}
-        handleShowRecipeOnMobile={handleShowRecipeOnMobile}
       />
       <KeyboardHint />
     </main>
