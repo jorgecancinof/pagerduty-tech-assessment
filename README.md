@@ -1,17 +1,22 @@
-# PagerDuty Tech Assessment
+<div align="center">
+  <img src="public/favicon.svg" width="200" height="200" alt="Recipe App icon" />
+  <h1 align="center">Recipe App</h1>
+  <h3 align="center">Discover recipes quickly with a responsive autocomplete app</h3>
+</div>
 
-## React Autocomplete App
+Initially developed as part of a take-home assessment for a job application, this project has been refined and made
+available as a demonstration of my skills. It features a custom autocomplete component with text highlighting and
+keyboard navigation. Fully responsive, it works seamlessly on both mobile and desktop devices.
 
-This autocomplete app lets users swiftly search for cooking recipes using a custom-built component, avoiding
-third-party dependencies. It's designed to be responsive and user-friendly across mobile or desktop.
+## Screenshots
 
-<p align="center">
+<div align="center">
   <img src="docs/screenshot-desktop.jpg" width="800" alt="Screenshot desktop" />
-</p>
+</div>
 
-<p align="center">
+<div align="center">
   <img src="docs/screenshot-mobile.png" width="800" alt="Screenshot mobile" />
-</p>
+</div>
 
 ## Features
 
@@ -25,8 +30,8 @@ third-party dependencies. It's designed to be responsive and user-friendly acros
 
 - React 18
 - TypeScript
-- Vite
 - CSS with BEM methodology
+- Vite
 
 ## Data source
 
