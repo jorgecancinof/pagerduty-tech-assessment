@@ -55,3 +55,7 @@ Ensure you have the latest LTS version of Node.js installed.
    ```
 
 2. Open the localhost URL shown in the terminal to view the app.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
