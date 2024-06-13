@@ -41,20 +41,35 @@ This app uses the [TheMealDB API](https://www.themealdb.com/api.php) to fetch co
 
 ### Prerequisites
 
-Ensure you have the latest LTS version of Node.js installed.
+This project uses Node.js LTS version 20.14.0. The [`.nvmrc`](.nvmrc) file in the project root ensures compatibility with Node.js version managers like [NVM](https://github.com/nvm-sh/nvm), [FNM](https://github.com/Schniz/fnm), and [Volta](https://volta.sh/).
 
 ### Installation
 
-1. Clone the repository.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jorgecancinof/recipe-app.git
+   ```
 
-2. Install the dependencies:
-    ```bash
-    npm install
-    ```
+2. (Optional) If you are using NVM or FNM, ensure you are using the correct Node.js version.
+
+   For NVM users:
+   ```bash
+   nvm use
+   ```
+
+   For FNM users:
+   ```bash
+   fnm use
+   ```
+
+3. Install the dependencies:
+   ```bash
+   npm ci
+   ```
 
 ### Running the project
 
-1. To start the development server:
+1. Start the development server:
    ```bash
    npm run dev
    ```
