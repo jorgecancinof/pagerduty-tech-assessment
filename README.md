@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="public/favicon.svg" width="200" height="200" alt="Recipe App icon" />
-  <h1 align="center">Recipe App</h1>
+  <img src="public/favicon.svg" width="200" height="200" alt="Recipe Finder icon" />
+  <h1 align="center">Recipe Finder</h1>
   <p align="center"><strong>Discover recipes with a responsive autocomplete app</strong></p>
 </div>
 
@@ -44,7 +44,7 @@ This app uses the [TheMealDB API](https://www.themealdb.com/api.php) to fetch co
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/jorgecancinof/recipe-app.git && cd recipe-app
+   git clone https://github.com/jorgecancinof/recipe-finder.git && cd recipe-finder
    ```
 
 2. This project uses Node.js LTS version 20.14.0. If you have a Node.js version manager
